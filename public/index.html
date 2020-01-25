@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Time Registration</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        margin-top: 60px;
+      }
+      strong:hover {
+        border-bottom: 2px solid #333;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <div class="container" id="app">
+        <p class="lead text-right">{{ title }} <strong>{{ currentMonthName() }}</strong></p>
+        <hr />
+        <div v-for="entry in entries" class="entry">
+          <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">{{ entry.name }}</h1>
+            <p class="lead">{{ entry.note }}</p>
+          </div>
+          <div class="card-deck mb-3 text-center">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Hours</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ entry.total.h }}</h1>
+              </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Minutes</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ entry.total.m }}</h1>
+              </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+              <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Seconds</h4>
+              </div>
+              <div class="card-body">
+                <h1 class="card-title pricing-card-title">{{ entry.total.s }}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+      var months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+      
+      var app = new Vue({
+        el: '#app',
+        data: {
+          title: 'Time Registration for ',
+          entries: [],
+        },
+        methods: {
+          currentMonthName() {
+            return months[this.currentMonth];
+          },
+          getFormattedDate() {
+            return this.currentYear + (this.currentMonth + 101).toString().substr(1, 2);
+          },
+          getClient() {
+            return location.pathname.replace(/\//g, '');
+          }
+        },
+        computed: {
+          currentMonth: () => {
+            const month = new Date().getMonth();
+            try {
+              month = parseInt(location.search.split('=')[1].substr(4, 2), 10) - 1;
+            } catch (err) {}
+            return month;
+          },
+          currentYear: () => {
+            const year = new Date().getFullYear();
+            try {
+              year = parseInt(location.search.split('=')[1].substr(0, 4), 10);
+            } catch (err) {}
+            return year;
+          },
+        },
+        created() {
+          fetch('/api/' + this.getClient() + '?from=' + this.getFormattedDate())
+            .then(res => res.json())
+            .then(json => {
+              Object.keys(json).forEach(p => {
+                this.entries.push(Object.assign({ name: p }, json[p]));
+              });
+            });
+        },
+      });
+    </script>
+  </body>
+</html>
