@@ -1,0 +1,35 @@
+// CLOCKIFY API, https://clockify.me/developers-api
+
+@HOST = https://api.clockify.me/api/v1
+@USER = ?
+@WORKSPACE = ?
+@APIKEY = ?
+
+GET {{HOST}}/user
+X-Api-Key: {{APIKEY}}
+content-type: application/json
+###
+GET {{HOST}}/workspaces
+X-Api-Key: {{APIKEY}}
+content-type: application/json
+###
+GET {{HOST}}/workspaces/{{WORKSPACE}}/clients
+X-Api-Key: {{APIKEY}}
+content-type: application/json
+###
+GET {{HOST}}/workspaces/{{WORKSPACE}}/projects
+X-Api-Key: {{APIKEY}}
+content-type: application/json
+###
+GET {{HOST}}/workspaces/{{WORKSPACE}}/user/{{USER}}/time-entries
+    ?project=5afe0d55b0798714aa84cdd6&start=2020-01-24T00:00:00Z
+X-Api-Key: {{APIKEY}}
+content-type: application/json
+###
+GET {{HOST}}/user
+X-Api-Key: {{APIKEY}}
+content-type: application/json
+###
+GET {{HOST}}/user
+X-Api-Key: {{APIKEY}}
+content-type: application/json
