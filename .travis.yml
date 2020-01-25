@@ -1,0 +1,7 @@
+language: node_js
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: "<ENCRYPTED API KEY>"
+  app: ba-registrations
