@@ -1,0 +1,36 @@
+{
+  "name": "ba-clockify",
+  "version": "1.0.0",
+  "description": "A simple visualization of registration hours",
+  "engines": {
+    "node": "12.x",
+    "npm": "6.x"
+  },
+  "scripts": {
+    "start": "node ./server/server.js",
+    "format": "prettier --write \"**/*.{js,jsx,md,json,html,css,yml}\" --ignore-path .gitignore",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "test:prettier": "prettier --check \"**/*.{js,jsx,md,json,html,css,yml}\" --ignore-path .gitignore",
+    "test:lint": ".\\node_modules\\.bin\\eslint ./**/*.js",
+    "eslint-check-rules": "eslint --print-config ./**/*.js | eslint-config-prettier-check"
+  },
+  "keywords": [],
+  "author": "Bruno Alexandre",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "moment": "^2.24.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}
