@@ -8,3 +8,7 @@ Used technologies:
 - VueJs + Bootstrap (for frontend rendering)
 - MomentJs and Axios (to handle time parsing and HTTP calls)
 - [Clockify Api](https://clockify.me/developers-api)
+
+## Sample
+
+A sample page can be found hosted on [Heroku](https://ba-registrations.herokuapp.com/)
