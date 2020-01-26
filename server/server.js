@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // static routes
-app.use('/', express.static('./public/start'));
+app.use('/', express.static('./public'));
 app.use('/:clientId', express.static('./public'));
 
 // api route
