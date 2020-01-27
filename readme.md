@@ -12,3 +12,5 @@ Used technologies:
 ## Sample
 
 A sample page can be found hosted on [Heroku](https://ba-registrations.herokuapp.com/)
+
+[![Actions Status](https://github.com/balexandre/ba-clockify/workflows/Node%20CI/badge.svg)](https://github.com/balexandre/ba-clockify/actions)
