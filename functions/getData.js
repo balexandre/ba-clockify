@@ -7,7 +7,8 @@ exports.handler = async (event, context, callback) => {
   console.log('context', JSON.stringify(context, null, 4));
 
   try {
-    const result = await engine.getTimes(path.clientId, queryStringParameters.from);
+    const { client, from: date } = queryStringParameters;
+    const result = await engine.getTimes(client, date);
 
     return callback(null, {
       statusCode: 200,

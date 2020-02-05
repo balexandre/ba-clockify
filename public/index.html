@@ -141,8 +141,12 @@
         },
         created() {
           var client = this.getClient();
+          var date = this.getFormattedDate();
+          var url = window.hostname.indexOf('') >= 0
+            ? '/.netlify/functions/getData?client=' + client + '&from=' + date
+            : '/api/' + client + '?from=' + date;
           if (client && client.length === 24) {
-            fetch('/api/' + this.getClient() + '?from=' + this.getFormattedDate())
+            fetch(url)
               .then(res => res.json())
               .then(json => {
                 Object.keys(json).forEach(p => {
