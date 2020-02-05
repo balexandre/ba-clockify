@@ -142,7 +142,7 @@
         created() {
           var client = this.getClient();
           var date = this.getFormattedDate();
-          var url = window.hostname.indexOf('') >= 0
+          var url = window.location.hostname.indexOf('') >= 0
             ? '/.netlify/functions/getData?client=' + client + '&from=' + date
             : '/api/' + client + '?from=' + date;
           if (client && client.length === 24) {
