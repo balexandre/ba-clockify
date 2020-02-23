@@ -89,11 +89,26 @@ const sumTimeEntries = projects => {
   return projects;
 };
 
+const parseIncomingDate = date => {
+  // January '20
+  let [month, year] = date.split(" '");
+  if (date === '') {
+    const now = moment();
+    month = now.format('MMMM');
+    year = now.format('YY');
+  }
+  return {
+    month,
+    year,
+  };
+};
+
 // main call to get all times from a client
 const getTimes = async (client, from) => {
   // from = "20200" ~ "202012"
   const now = moment();
-  const mFrom = from ? moment(`${from.substr(0, 4)}-${from.substr(4, 2)}-01`) : now.startOf('month');
+  const parsedDate = parseIncomingDate(from);
+  const mFrom = from ? moment(`'01-${parsedDate.month}-${parsedDate.year}`, 'DD-MMMM-YY') : now.startOf('month');
   const formFrom = `${mFrom.format('YYYY-MM-DDT00:00:00')}Z`;
   const formTo = `${mFrom.add(1, 'month').format('YYYY-MM-DDT00:00:00')}Z`;
 
