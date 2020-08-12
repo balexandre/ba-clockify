@@ -1,4 +1,4 @@
-const engine = require('./../utilities/engine');
+const engine = require('../utilities/engine');
 
 exports.handler = async (event, context, callback) => {
   const { path, queryStringParameters } = event;
